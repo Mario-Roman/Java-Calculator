@@ -64,10 +64,25 @@ public class Calculator extends javax.swing.JFrame {
         });
 
         jButton2.setText("*");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("/");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("-");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("7");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +169,11 @@ public class Calculator extends javax.swing.JFrame {
         });
 
         jButton19.setText(".");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -312,14 +332,56 @@ public class Calculator extends javax.swing.JFrame {
         this.segundonumero=Float.parseFloat(this.casilla.getText());
        
         switch(this.operador){
-            case "+":this.casilla.setText(Float.toString(this.primernumero+this.segundonumero));
-        
+            case "+":this.casilla.setText(sincero(this.primernumero+this.segundonumero));break;
+            case "-":this.casilla.setText(sincero(this.primernumero-this.segundonumero));break;
+            case "*":this.casilla.setText(sincero(this.primernumero*this.segundonumero));break;
+            case "/":if(this.segundonumero==0){this.casilla.setText("NoSeDivideEntreCero");}
+            else{
+                
+                this.casilla.setText(sincero(this.primernumero/this.segundonumero));}break;
         }
     }//GEN-LAST:event_jButton18ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.primernumero=Float.parseFloat(this.casilla.getText());
+        this.operador="-";
+        this.casilla.setText("");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.primernumero=Float.parseFloat(this.casilla.getText());
+        this.operador="*";
+        this.casilla.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.primernumero=Float.parseFloat(this.casilla.getText());
+        this.operador="/";
+        this.casilla.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        if(!(this.casilla.getText().contains("."))){
+            this.casilla.setText(this.casilla.getText()+".");
+        
+        }
+        
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    public String sincero(float resultado){
+        String retorno="";
+        
+        retorno=Float.toString(resultado);
+        
+        if(resultado%1==0){
+            retorno=retorno.substring(0, retorno.length()-2);
+        }
+        
+        return retorno;
+    }
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
